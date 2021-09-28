@@ -15,6 +15,9 @@ public class DictionaryCommandline {
         DictionaryManagement.insertFromCommandline();
         showAllWords();
     }
+
+    /** DictionaryAdvanced. */
+    
     /** Main. */
     public static void main(String args[]) {
         Dictionary dict = new Dictionary();
