@@ -1,10 +1,15 @@
-public class Dictionary
-{
-    public static int sz;
-    private final int MAX_SIZE = 250;
-    public static Word[] words;
+import java.util.ArrayList;
+
+public class Dictionary {
+    /**
+     * declare attributes here.
+     */
+    public static ArrayList<Word> words;
+
+    /**
+     * Constructor.
+     */
     Dictionary() {
-        sz = 0;
-        words = new Word[MAX_SIZE];
+        words = new ArrayList<>();
     }
 }
