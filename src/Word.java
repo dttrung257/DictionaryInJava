@@ -1,20 +1,23 @@
-public class Word
-{
+public class Word {
+    /**
+     * declare attributes here.
+     */
     private String word_target;
     private String word_explain;
-    public void print() {
-        System.out.println(word_target + ": " + word_explain);
-    }
-    public void setWord_target(String str) {
-        word_target = str;
-    }
-    public void setWord_explain(String str) {
-        word_explain = str;
-    }
+
     public String getWord_target() {
         return word_target;
     }
+
     public String getWord_explain() {
         return word_explain;
+    }
+
+    public void setWord_target(String word_target) {
+        this.word_target = word_target;
+    }
+
+    public void setWord_explain(String word_explain) {
+        this.word_explain = word_explain;
     }
 }
