@@ -1,15 +1,10 @@
 import java.util.ArrayList;
 
-public class Dictionary {
-    /**
-     * declare attributes here.
-     */
+public class Dictionary
+{
     public static ArrayList<Word> words;
-
-    /**
-     * Constructor.
-     */
-    Dictionary() {
+    Dictionary()
+    {
         words = new ArrayList<>();
     }
 }
