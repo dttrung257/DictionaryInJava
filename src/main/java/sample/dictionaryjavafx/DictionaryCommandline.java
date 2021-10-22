@@ -26,21 +26,6 @@ public class DictionaryCommandline {
         showAllWords();
     }
 
-    public static ArrayList<String> dictionarySearch(String inputWord) {
-        DictionaryManagement.insertFromFile("src\\dictionaries.txt");
-        ArrayList<String> result = new ArrayList<>();
-        for (int i = 0; i < Dictionary.words.size(); i++) {
-            String strTarget = Dictionary.words.get(i).getWord_target();
-            if (strTarget.length() >= inputWord.length()) {
-                if (inputWord.equals(strTarget.substring(0, inputWord.length()))) {
-                    String strExplain = Dictionary.words.get(i).getWord_explain();
-                    result.add(strTarget);
-                }
-            }
-        }
-        return result;
-    }
-
     /** Advanced function. */
     public static void dictionaryAdvanced() {
         DictionaryManagement.insertFromFile("src\\dictionaries.txt");
@@ -75,12 +60,23 @@ public class DictionaryCommandline {
     /** Main. */
     public static void main(String[] args) {
         Dictionary dictionary = new Dictionary();
+        DictionaryAdvancedManagement.insertAdvancedFile("src\\dictionariesFull.txt");
+        System.out.printf("%-10s%-22s%-22s%s\n", "No", "English", "Pronunciation", "Vietnamese");
+        System.out.println("--------------------------------------------------------------------");
+        for (int i = 0; i < Dictionary.wordsAdvanced.size(); i++) {
+            String wordTarget = Dictionary.wordsAdvanced.get(i).getWord_target();
+            String wordExplain = Dictionary.wordsAdvanced.get(i).getWord_explain();
+            String wordPronun = Dictionary.wordsAdvanced.get(i).getWord_pronun();
+            System.out.printf("%-10s%-22s%-22s%s\n", i + 1, wordTarget, wordPronun, wordExplain);
+        }
+        //DictionaryManagement.insertFromFile("src\\dictionaries.txt");
+        //System.out.println(DictionaryManagement.dictionarySearchExplain("aback"));
         //dictionaryBasic();
         //dictionaryAdvanced();
-        ArrayList<String> list = dictionarySearch("ab");
+        /*ArrayList<String> list = dictionarySearch("ab");
         for (int  i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
-        }
+        }*/
     }
 }
 
