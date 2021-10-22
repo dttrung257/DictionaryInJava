@@ -9,7 +9,6 @@ public class Word {
      */
     private String word_target;
     private String word_explain;
-    private String word_pronun;
 
     public String getWord_target() {
         return word_target;
@@ -32,15 +31,6 @@ public class Word {
         return "Word[" +
                 "word_target='" + word_target + '\'' +
                 ", word_explain='" + word_explain + '\'' +
-                ", word_pronun='" + word_pronun + '\'' +
                 ']';
-    }
-
-    public String getWord_pronun() {
-        return word_pronun;
-    }
-
-    public void setWord_pronun(String word_pronun) {
-        this.word_pronun = word_pronun;
     }
 }
