@@ -1,7 +1,11 @@
 package sample.dictionaryjavafx;
 
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import com.sun.speech.freetts.*;
 
 public class DictionaryAdvancedManagement {
     /**
@@ -217,5 +221,35 @@ public class DictionaryAdvancedManagement {
         w.setWord_target(word);
         w.setWord_pronun(pronun);
         Dictionary.wordsAdvanced.add(w);
+    }
+
+    public static String translate(String text) throws IOException {
+        String urlStr = "https://script.google.com/macros/s/AKfycbySwcqSyUqlrrss0qvl8Mncg4IRCUq2OLl-S_HIlLY8bhq9xhbv/exec" +
+                "?q=" + URLEncoder.encode(text, "UTF-8") + "&target=vi&source=en";
+        URL url = new URL(urlStr);
+        StringBuilder response = new StringBuilder();
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestProperty("User-Agent", "Mozilla/5.0");
+        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String inputLine;
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+        return response.toString();
+    }
+
+
+    public static void speakWord(String word) {
+        System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
+        //VoiceManager freettsVM;
+        //Voice freettsVoice;
+        //Voice voice;
+        //String voiceName = "kevin16";
+        VoiceManager freettsVM = VoiceManager.getInstance();
+        Voice freettsVoice = freettsVM.getVoice("kevin16");
+        freettsVoice.allocate();
+        freettsVoice.speak(word);
+        //freettsVoice.deallocate();
     }
 }

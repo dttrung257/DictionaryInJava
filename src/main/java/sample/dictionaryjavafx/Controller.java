@@ -227,6 +227,11 @@ public class Controller implements Initializable {
         DictionaryAdvancedManagement.writeWordToFile(account, Word_target.getText(), Word_pronunciation.getText(), word_explainAd.getText());
     }
     @FXML
+    void Sound(MouseEvent event) {
+        String selectedText = listView.getSelectionModel().getSelectedItem();
+        DictionaryAdvancedManagement.speakWord(selectedText);
+    }
+    @FXML
     void exit() {
         System.exit(0);
     }
