@@ -29,6 +29,8 @@ public class Controller implements Initializable {
     @FXML
     private Pane MainPane, LoginPane, SignUpPane, SearchPane, SearchAcc, YourWords, WordExplain, AddWord;
     @FXML
+    private Pane ParaTran, RightPane;
+    @FXML
     private TextField searchBarBasic;
     @FXML
     private TextField AccountLogin;
@@ -62,13 +64,14 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         DictionaryManagement.insertFromFile("src\\dictionaries.txt");
-        DictionaryAdvancedManagement.insertAdvancedFile("src\\dictionariesFull.txt");
+        DictionaryAdvancedManagement.insertDatabase();
         DictionaryAdvancedManagement.loadAccount();
     }
     public void ReInitialize() {
         Dictionary.wordsAdvanced.clear();
-        DictionaryAdvancedManagement.insertAdvancedFile("src\\dictionariesFull.txt");
-
+        Dictionary.accounts.clear();
+        DictionaryAdvancedManagement.insertDatabase();
+        DictionaryAdvancedManagement.loadAccount();
     }
     @FXML
     void SwitchLoginPane(MouseEvent event) {
@@ -161,9 +164,19 @@ public class Controller implements Initializable {
             edit.setText("Save");
         }
         else {
-            DictionaryAdvancedManagement.writeWordToFile(account, Word_target.getText(), Word_pronunciation.getText(), word_explainAd.getText());
-            DictionaryAdvancedManagement.EditExplain(Word_target.getText(), word_explainAd.getText());
+            //DictionaryAdvancedManagement.writeWordToFile(account, Word_target.getText(), Word_pronunciation.getText(), word_explainAd.getText());
+            String temp = word_explainAd.getText();
+            String[] tokens = temp.split("\n");
+            String tmp = "";
+            for (int i = 0; i < tokens.length; i++) {
+                if (!tokens[i].equals("")) {
+                    tmp += tokens[i] + "\n";
+                }
+            }
+            temp = tmp;
+            DictionaryAdvancedManagement.EditExplain(account, Word_target.getText(), temp);
             edit.setText("Edit");
+            word_explainAd.setText(temp);
         }
     }
     @FXML
@@ -175,6 +188,8 @@ public class Controller implements Initializable {
         Word_pronunciation.setText("");
         login.setVisible(true);
         SearchAcc.setVisible(false);
+        SignUpPane.setVisible(false);
+        LoginPane.setVisible(true);
     }
     @FXML
     void YourWordsColl(MouseEvent event) {
@@ -223,6 +238,7 @@ public class Controller implements Initializable {
     }
     @FXML
     void AddToCollection(MouseEvent event) {
+        if (Word_target.getText().equals("")) return;
         yourWords.getItems().add(Word_target.getText());
         DictionaryAdvancedManagement.writeWordToFile(account, Word_target.getText(), Word_pronunciation.getText(), word_explainAd.getText());
     }
@@ -230,6 +246,11 @@ public class Controller implements Initializable {
     void Sound(MouseEvent event) {
         String selectedText = listView.getSelectionModel().getSelectedItem();
         DictionaryAdvancedManagement.speakWord(selectedText);
+    }
+    @FXML
+    void ParaTranslate(MouseEvent event) {
+        ParaTran.setVisible(!ParaTran.isVisible());
+        RightPane.setVisible(!RightPane.isVisible());
     }
     @FXML
     void exit() {

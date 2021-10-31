@@ -7,6 +7,7 @@ module sample.dictionaryjavafx {
     requires org.kordamp.bootstrapfx.core;
     requires en.us;
     requires freetts;
+    requires java.sql;
 
     opens sample.dictionaryjavafx to javafx.fxml;
     exports sample.dictionaryjavafx;

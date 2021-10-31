@@ -6,8 +6,32 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import com.sun.speech.freetts.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class DictionaryAdvancedManagement {
+    public static void insertDatabase() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/evdiction", "root", "Mai123456@");
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from av");
+            while (rs.next()) {
+                Word w = new Word();
+                w.setWord_target(rs.getString(1));
+                w.setWord_pronun(rs.getString(2));
+                w.setWord_explain(rs.getString(3).substring(1, rs.getString(3).length() - 1));
+                System.out.println(rs.getString(1) + "  " + rs.getString(2)
+                        + "  " + rs.getString(3));
+                Dictionary.wordsAdvanced.add(w);
+            }
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * Search exact word.
      *
@@ -143,7 +167,15 @@ public class DictionaryAdvancedManagement {
     }
     public static void writeWordToFile(String account, String word, String pronun, String explain) {
         try {
-            String str = "@" + word + "/" + pronun + "/\n" + explain + "\n";
+            String[] tokens = explain.split("\n");
+            String tmp = "";
+            for (int i = 0; i < tokens.length; i++) {
+                if (!tokens[i].equals("")) {
+                    tmp += tokens[i] + "\n";
+                }
+            }
+            explain = tmp;
+            String str = "@" + word + pronun + "\n" + explain;
             BufferedWriter writer = new BufferedWriter(new FileWriter("src\\accountData\\" + account + ".txt", true));
             writer.append(str);
             writer.close();
@@ -207,12 +239,38 @@ public class DictionaryAdvancedManagement {
         }
         return result;
     }
-    public static void EditExplain(String word, String explain) {
+    public static void EditExplain(String account, String word, String explain) {
         for (int i = 0; i < Dictionary.wordsAdvanced.size(); i++) {
             if(Dictionary.wordsAdvanced.get(i).getWord_target().equals(word)) {
                 Dictionary.wordsAdvanced.get(i).setWord_explain(explain);
                 break;
             }
+        }
+        ArrayList<String> yourWords = insertAccountFile("src\\accountData\\" + account + ".txt");
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream("src\\accountData\\" + account + ".txt");
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
+            BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
+
+            for (String w : yourWords) {
+                for (int i = 0; i < Dictionary.wordsAdvanced.size(); i++) {
+                    Word temp = Dictionary.wordsAdvanced.get(i);
+                    if (temp.getWord_target().equals(w) && !w.equals(word)) {
+                        String line = "@" + temp.getWord_target() + temp.getWord_pronun();
+                        line += "\n" + temp.getWord_explain();
+                        bufferedWriter.write(line);
+                    } else if (temp.getWord_target().equals(w) && w.equals(word)) {
+                        String line = "@" + word + temp.getWord_pronun();
+                        line += "\n" + explain;
+                        bufferedWriter.write(line);
+                    }
+                }
+            }
+            bufferedWriter.close();
+            outputStreamWriter.close();
+            fileOutputStream.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
     public static void AddNewWord(String word, String pronun, String explain) {
@@ -222,7 +280,6 @@ public class DictionaryAdvancedManagement {
         w.setWord_pronun(pronun);
         Dictionary.wordsAdvanced.add(w);
     }
-
     public static String translate(String text) throws IOException {
         String urlStr = "https://script.google.com/macros/s/AKfycbySwcqSyUqlrrss0qvl8Mncg4IRCUq2OLl-S_HIlLY8bhq9xhbv/exec" +
                 "?q=" + URLEncoder.encode(text, "UTF-8") + "&target=vi&source=en";
@@ -238,8 +295,6 @@ public class DictionaryAdvancedManagement {
         in.close();
         return response.toString();
     }
-
-
     public static void speakWord(String word) {
         System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
         //VoiceManager freettsVM;
