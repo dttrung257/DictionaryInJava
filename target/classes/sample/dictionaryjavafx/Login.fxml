@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.dictionaryjavafx.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.dictionaryjavafx.Controller">
     <children>
         <ImageView fitHeight="542.0" fitWidth="231.0" pickOnBounds="true">
             <image>
@@ -33,27 +33,27 @@
                             <Font size="32.0" />
                         </font>
                     </Label>
-                    <Label layoutX="12.0" layoutY="90.0" text="English-Vietnamese" textAlignment="CENTER" textFill="#f7f5f5">
+                    <Label layoutX="12.0" layoutY="90.0" text="English-Vietnamese" textAlignment="CENTER" textFill="#f9f9fa">
                         <font>
                             <Font size="24.0" />
                         </font>
                     </Label>
-                    <Button alignment="CENTER" layoutX="60.0" layoutY="230.0" mnemonicParsing="false" onMouseClicked="#SwitchLoginPane" prefHeight="20.0" prefWidth="100.0" text="Log in">
+                    <Button alignment="CENTER" layoutX="60.0" layoutY="230.0" mnemonicParsing="false" onMouseClicked="#SwitchLoginPane" prefHeight="27.0" prefWidth="111.0" text="Sign in">
                         <font>
                             <Font size="13.0" />
                         </font>
                     </Button>
-                    <Button alignment="CENTER" layoutX="60.0" layoutY="270.0" mnemonicParsing="false" onMouseClicked="#SwitchSignupPane" prefHeight="20.0" prefWidth="100.0" text="Sign up" textAlignment="CENTER">
+                    <Button alignment="CENTER" layoutX="60.0" layoutY="270.0" mnemonicParsing="false" onMouseClicked="#SwitchSignupPane" prefHeight="25.0" prefWidth="111.0" text="Sign up" textAlignment="CENTER">
                         <font>
                             <Font size="13.0" />
                         </font>
                     </Button>
-                    <Button alignment="CENTER" layoutX="60.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#SwitchSearchPane" prefHeight="20.0" prefWidth="100.0" text="Search" textAlignment="CENTER">
+                    <Button alignment="CENTER" layoutX="60.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#SwitchSearchPane" prefHeight="23.0" prefWidth="111.0" text="Search" textAlignment="CENTER">
                         <font>
                             <Font size="13.0" />
                         </font>
                     </Button>
-                    <Button alignment="CENTER" layoutX="60.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#exit" prefHeight="20.0" prefWidth="100.0" text="Exit" textAlignment="CENTER">
+                    <Button alignment="CENTER" layoutX="60.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#exit" prefHeight="23.0" prefWidth="111.0" text="Exit" textAlignment="CENTER">
                         <font>
                             <Font size="13.0" />
                         </font>
@@ -82,133 +82,6 @@
             </Pane>
             <StackPane layoutX="231.0" layoutY="-3.0" prefHeight="551.0" prefWidth="511.0">
                 <children>
-                    <Pane fx:id="MainPane" prefHeight="529.0" prefWidth="511.0">
-                        <children>
-                            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="58.0" text="Welcome to TDQ dictionary!!!" textFill="#462c67">
-                                <font>
-                                    <Font name="Zilla Slab Bold Italic" size="36.0" />
-                                </font>
-                            </Label>
-                            <Label layoutX="34.0" layoutY="116.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="443.0" text="This dictionary contains over most common 20,000 words." textFill="#44318d" wrapText="true">
-                                <font>
-                                    <Font name="Zilla Slab SemiBold" size="17.0" />
-                                </font>
-                            </Label>
-                            <Label layoutX="41.0" layoutY="173.0" prefHeight="30.0" prefWidth="348.0" text="Learn better with member account: " wrapText="true">
-                                <font>
-                                    <Font name="Zilla Slab SemiBold" size="20.0" />
-                                </font>
-                            </Label>
-                            <Label layoutX="86.0" layoutY="215.0" prefHeight="35.0" prefWidth="295.0" text="#Unlimited Word Lookups">
-                                <font>
-                                    <Font name="Zilla Slab SemiBold" size="20.0" />
-                                </font>
-                            </Label>
-                            <Label layoutX="86.0" layoutY="258.0" prefHeight="35.0" prefWidth="295.0" text="#Audio Pronunciations">
-                                <font>
-                                    <Font name="Zilla Slab SemiBold" size="20.0" />
-                                </font>
-                            </Label>
-                            <Label layoutX="86.0" layoutY="306.0" prefHeight="35.0" prefWidth="295.0" text="#Intensive Explantion">
-                                <font>
-                                    <Font name="Zilla Slab SemiBold" size="20.0" />
-                                </font>
-                            </Label>
-                            <Label layoutX="86.0" layoutY="348.0" prefHeight="35.0" prefWidth="295.0" text="#So Many Other Useful Features">
-                                <font>
-                                    <Font name="Zilla Slab SemiBold" size="20.0" />
-                                </font>
-                            </Label>
-                            <Label layoutX="162.0" layoutY="488.0" prefHeight="35.0" prefWidth="187.0" text="Knowledge is power." textFill="#44318d">
-                                <font>
-                                    <Font name="Zilla Slab SemiBold" size="18.0" />
-                                </font>
-                            </Label>
-                        </children>
-                    </Pane>
-                    <Pane fx:id="LoginPane" layoutX="10.0" layoutY="10.0" prefHeight="551.0" prefWidth="472.0" visible="false">
-                        <children>
-                            <Label layoutX="67.0" layoutY="167.0" text="User account:">
-                                <font>
-                                    <Font name="Serif Regular" size="20.0" />
-                                </font>
-                            </Label>
-                            <TextField fx:id="AccountLogin" layoutX="66.0" layoutY="194.0">
-                                <font>
-                                    <Font name="SansSerif Regular" size="12.0" />
-                                </font></TextField>
-                            <Label layoutX="66.0" layoutY="226.0" text="Password:">
-                                <font>
-                                    <Font name="Serif Regular" size="20.0" />
-                                </font>
-                            </Label>
-                            <PasswordField fx:id="PasswordLogin" layoutX="66.0" layoutY="263.0" />
-                            <Button layoutX="107.0" layoutY="297.0" mnemonicParsing="false" onMouseClicked="#LogInAccount" text="Log in" />
-                            <Label layoutX="82.0" layoutY="465.0" prefHeight="50.0" prefWidth="348.0" text="“Live as if you were to die tomorrow. Learn as if you were to live forever”" textAlignment="CENTER" textFill="#44318d" wrapText="true">
-                                <font>
-                                    <Font name="Zilla Slab SemiBold Italic" size="18.0" />
-                                </font>
-                            </Label>
-                            <Label layoutX="37.0" layoutY="65.0" text="TDQ Dictionary " textFill="#462c67">
-                                <font>
-                                    <Font name="Zilla Slab Bold" size="36.0" />
-                                </font>
-                            </Label>
-                            <Label layoutX="167.0" layoutY="116.0" text="Our dictionary but your words" textFill="#44318d">
-                                <font>
-                                    <Font name="Cormorant Infant SemiBold" size="20.0" />
-                                </font>
-                            </Label>
-                            <Label fx:id="IncorrectAccount" layoutX="64.0" layoutY="349.0" textFill="RED">
-                                <font>
-                                    <Font name="SansSerif Regular" size="14.0" />
-                                </font>
-                            </Label>
-                        </children>
-                    </Pane>
-                    <Pane fx:id="SignUpPane" layoutX="10.0" layoutY="10.0" prefHeight="551.0" prefWidth="472.0" visible="false">
-                        <children>
-                            <Label layoutX="37.0" layoutY="64.0" text="TDQ Dictionary " textFill="#462c67">
-                                <font>
-                                    <Font name="Zilla Slab Bold" size="36.0" />
-                                </font>
-                            </Label>
-                            <Label layoutX="167.0" layoutY="116.0" text="Our dictionary but your words" textFill="#44318d">
-                                <font>
-                                    <Font name="Cormorant Infant SemiBold" size="20.0" />
-                                </font>
-                            </Label>
-                            <Label layoutX="67.0" layoutY="167.0" text="User account:">
-                                <font>
-                                    <Font name="Serif Regular" size="20.0" />
-                                </font>
-                            </Label>
-                            <TextField fx:id="AccountSignup" layoutX="66.0" layoutY="194.0" promptText="No whitespace" />
-                            <Label layoutX="66.0" layoutY="226.0" text="Password:">
-                                <font>
-                                    <Font name="Serif Regular" size="20.0" />
-                                </font>
-                            </Label>
-                            <PasswordField fx:id="PasswordSignup" layoutX="64.0" layoutY="256.0" promptText="6-8 characters" />
-                            <Button layoutX="103.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#SignUpAccount" text="Sign up" />
-                            <Label layoutX="82.0" layoutY="465.0" prefHeight="50.0" prefWidth="348.0" text="“The beautiful thing about learning is that no one can take it away from you”" textAlignment="CENTER" textFill="#44318d" wrapText="true">
-                                <font>
-                                    <Font name="Zilla Slab SemiBold Italic" size="18.0" />
-                                </font>
-                            </Label>
-                            <Label layoutX="67.0" layoutY="289.0" text="Retype password:">
-                                <font>
-                                    <Font name="Serif Regular" size="20.0" />
-                                </font>
-                            </Label>
-                            <PasswordField fx:id="PasswordRetype" layoutX="65.0" layoutY="319.0" promptText="..." />
-                            <Label fx:id="IncorrectAccountSignUp" layoutX="67.0" layoutY="412.0" textFill="RED">
-                                <font>
-                                    <Font name="SansSerif Regular" size="14.0" />
-                                </font>
-                            </Label>
-                        </children>
-                    </Pane>
                     <Pane fx:id="SearchPane" layoutX="10.0" layoutY="10.0" prefHeight="551.0" prefWidth="472.0" visible="false">
                         <children>
                             <Label layoutX="82.0" layoutY="465.0" prefHeight="50.0" prefWidth="348.0" text="“I am always ready to learn although I do not always like being taught”" textAlignment="CENTER" textFill="#44318d" wrapText="true">
@@ -231,6 +104,129 @@
                             <Label fx:id="Word_explain_basic" layoutX="43.0" layoutY="220.0" prefHeight="64.0" prefWidth="363.0" wrapText="true">
                                 <font>
                                     <Font name="SansSerif Bold" size="16.0" />
+                                </font>
+                            </Label>
+                        </children>
+                    </Pane>
+                    <Pane fx:id="LoginPane" layoutX="10.0" layoutY="10.0" prefHeight="551.0" prefWidth="472.0" visible="false">
+                        <children>
+                            <TextField fx:id="AccountLogin" layoutX="205.0" layoutY="233.0" prefHeight="27.0" prefWidth="169.0" style="-fx-background-color: transparent; -fx-border-color: #44318d; -fx-border-width: 0px 0px 2px 0px;">
+                                <font>
+                                    <Font name="SansSerif Regular" size="12.0" />
+                                </font></TextField>
+                            <PasswordField fx:id="PasswordLogin" layoutX="205.0" layoutY="289.0" prefHeight="27.0" prefWidth="169.0" style="-fx-background-color: transparent; -fx-border-color: #44318d; -fx-border-width: 0px 0px 2px 0px;" />
+                            <Button layoutX="246.0" layoutY="345.0" mnemonicParsing="false" onMouseClicked="#LogInAccount" prefHeight="23.0" prefWidth="87.0" style="-fx-background-color: #44318d;" text="Log in" textFill="#f4efef" />
+                            <Label layoutX="74.0" layoutY="441.0" prefHeight="74.0" prefWidth="385.0" text="“Live as if you were to die tomorrow. Learn as if you were to live forever”" textAlignment="CENTER" textFill="#44318d" wrapText="true">
+                                <font>
+                                    <Font name="Dubai Regular" size="19.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="37.0" layoutY="65.0" text="TDQ Dictionary " textFill="#462c67">
+                                <font>
+                                    <Font name="Zilla Slab Bold" size="36.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="167.0" layoutY="116.0" text="Our dictionary but your words" textFill="#44318d">
+                                <font>
+                                    <Font name="Cormorant Infant SemiBold" size="20.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="74.0" layoutY="235.0" text="User account:" textFill="#44318d">
+                                <font>
+                                    <Font name="Serif Regular" size="20.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="102.0" layoutY="291.0" text="Password:" textFill="#44318d">
+                                <font>
+                                    <Font name="Serif Regular" size="20.0" />
+                                </font>
+                            </Label>
+                            <Label fx:id="IncorrectAccount" layoutX="237.0" layoutY="396.0" textFill="#cf2424" />
+                        </children>
+                    </Pane>
+                    <Pane fx:id="MainPane" prefHeight="529.0" prefWidth="511.0">
+                        <children>
+                            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="58.0" text="Welcome to TDQ dictionary!!!" textFill="#462c67">
+                                <font>
+                                    <Font name="Zilla Slab Bold Italic" size="36.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="34.0" layoutY="116.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="443.0" text="This dictionary contains over most common 20,000 words." textFill="#44318d" wrapText="true">
+                                <font>
+                                    <Font name="Zilla Slab SemiBold" size="17.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="47.0" layoutY="174.0" prefHeight="30.0" prefWidth="348.0" text="Learn better with member account: " textFill="#060118" wrapText="true">
+                                <font>
+                                    <Font name="Zilla Slab SemiBold" size="20.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="86.0" layoutY="215.0" prefHeight="35.0" prefWidth="295.0" text="* Unlimited Word Lookups" textFill="#180000">
+                                <font>
+                                    <Font name="Zilla Slab SemiBold" size="20.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="86.0" layoutY="258.0" prefHeight="35.0" prefWidth="295.0" text="* Audio Pronunciations" textFill="#0b0000">
+                                <font>
+                                    <Font name="Zilla Slab SemiBold" size="20.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="86.0" layoutY="306.0" prefHeight="35.0" prefWidth="295.0" text="* Intensive Explantion" textFill="#1e0101">
+                                <font>
+                                    <Font name="Zilla Slab SemiBold" size="20.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="86.0" layoutY="348.0" prefHeight="35.0" prefWidth="295.0" text="* So Many Other Useful Features" textFill="#180101">
+                                <font>
+                                    <Font name="Zilla Slab SemiBold" size="20.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="137.0" layoutY="466.0" prefHeight="30.0" prefWidth="246.0" text="Knowledge is power." textFill="#44318d">
+                                <font>
+                                    <Font size="24.0" />
+                                </font>
+                            </Label>
+                        </children>
+                    </Pane>
+                    <Pane fx:id="SignUpPane" layoutX="10.0" layoutY="10.0" prefHeight="551.0" prefWidth="472.0" visible="false">
+                        <children>
+                            <Label layoutX="37.0" layoutY="64.0" text="TDQ Dictionary " textFill="#462c67">
+                                <font>
+                                    <Font name="Zilla Slab Bold" size="36.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="167.0" layoutY="116.0" text="Our dictionary but your words" textFill="#44318d">
+                                <font>
+                                    <Font name="Cormorant Infant SemiBold" size="20.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="121.0" layoutY="217.0" text="User account :" textFill="#44318d">
+                                <font>
+                                    <Font name="Serif Regular" size="19.0" />
+                                </font>
+                            </Label>
+                            <TextField fx:id="AccountSignup" layoutX="242.0" layoutY="214.0" prefHeight="16.0" prefWidth="160.0" style="-fx-background-color: transparent; -fx-border-color: #44318d; -fx-border-width: 0px 0px 2px 0px;" />
+                            <Label layoutX="148.0" layoutY="265.0" text="Password :" textFill="#44318d">
+                                <font>
+                                    <Font name="Serif Regular" size="19.0" />
+                                </font>
+                            </Label>
+                            <PasswordField fx:id="PasswordSignup" layoutX="242.0" layoutY="262.0" prefHeight="23.0" prefWidth="160.0" style="-fx-background-color: transparent; -fx-border-color: #44318d; -fx-border-width: 0px 0px 2px 0px;" />
+                            <Button layoutX="289.0" layoutY="372.0" mnemonicParsing="false" onMouseClicked="#SignUpAccount" prefHeight="20.0" prefWidth="77.0" style="-fx-background-color: #44318d;" text="Sign up" textFill="#f0eff4" />
+                            <Label layoutX="74.0" layoutY="452.0" prefHeight="64.0" prefWidth="363.0" text="“The beautiful thing about learning is that no one can take it away from you”" textAlignment="CENTER" textFill="#44318d" wrapText="true">
+                                <font>
+                                    <Font name="Dubai Regular" size="18.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="95.0" layoutY="313.0" text="Retype password:" textFill="#44318d">
+                                <font>
+                                    <Font name="Serif Regular" size="19.0" />
+                                </font>
+                            </Label>
+                            <PasswordField fx:id="PasswordRetype" layoutX="242.0" layoutY="310.0" prefHeight="25.0" prefWidth="160.0" promptText="..." style="-fx-background-color: transparent; -fx-border-color: #44318d; -fx-border-width: 0px 0px 2px 0px;" />
+                            <Label fx:id="IncorrectAccountSignUp" layoutX="67.0" layoutY="412.0" prefHeight="16.0" prefWidth="0.0" textFill="RED">
+                                <font>
+                                    <Font name="SansSerif Regular" size="14.0" />
                                 </font>
                             </Label>
                         </children>
@@ -258,97 +254,74 @@
                     </Label>
                     <TextField fx:id="searchBar" layoutX="18.0" layoutY="137.0" onKeyReleased="#Search" prefHeight="20.0" prefWidth="199.0" promptText="searchBar" text="" />
                     <Button layoutX="18.0" layoutY="488.0" mnemonicParsing="false" onMouseClicked="#Back" text="Back" />
-               <Button layoutX="88.0" layoutY="488.0" mnemonicParsing="false" onMouseClicked="#ParaTranslate" text="Paragraph Translation" />
                     <ListView fx:id="listView" layoutX="18.0" layoutY="160.0" onMouseClicked="#DisplayExplain" prefHeight="260.0" prefWidth="200.0" visible="false" />
                 </children>
             </Pane>
-         <Pane fx:id="ParaTran" layoutX="230.0" prefHeight="551.0" prefWidth="511.0" visible="false">
-            <children>
-               <Label layoutX="38.0" layoutY="31.0" text="English" textFill="#462c67">
-                  <font>
-                     <Font name="Zilla Slab Bold" size="30.0" />
-                  </font>
-               </Label>
-               <TextArea layoutX="39.0" layoutY="86.0" prefHeight="145.0" prefWidth="440.0" />
-               <Button layoutX="409.0" layoutY="251.0" mnemonicParsing="false" text="Translate" />
-               <Button layoutX="351.0" layoutY="251.0" mnemonicParsing="false" text="Clear" />
-               <Label layoutX="39.0" layoutY="276.0" text="Vietnamese" textFill="#462c67">
-                  <font>
-                     <Font name="Zilla Slab Bold" size="30.0" />
-                  </font>
-               </Label>
-               <TextArea layoutX="39.0" layoutY="328.0" prefHeight="145.0" prefWidth="440.0" />
-            </children>
-         </Pane>
-         <Pane fx:id="RightPane" layoutX="230.0" prefHeight="551.0" prefWidth="511.0">
-            <children>
-               <Pane fx:id="WordExplain" prefHeight="450.0" prefWidth="511.0">
-                  <children>
-                     <Label fx:id="Word_target" layoutX="30.0" layoutY="21.0" textFill="#462c67">
+            <Pane fx:id="WordExplain" layoutX="231.0" layoutY="-3.0" prefHeight="450.0" prefWidth="511.0">
+                <children>
+                    <Label fx:id="Word_target" layoutX="30.0" layoutY="21.0" textFill="#462c67">
                         <font>
-                           <Font name="Source Sans Pro Bold" size="45.0" />
+                            <Font name="Source Sans Pro Bold" size="45.0" />
                         </font>
-                     </Label>
-                     <Label fx:id="Word_pronunciation" layoutX="58.0" layoutY="89.0">
+                    </Label>
+                    <Label fx:id="Word_pronunciation" layoutX="58.0" layoutY="89.0">
                         <font>
-                           <Font name="SansSerif Regular" size="18.0" />
+                            <Font name="SansSerif Regular" size="18.0" />
                         </font>
-                     </Label>
-                     <TextArea fx:id="word_explainAd" editable="false" layoutX="33.0" layoutY="136.0" prefHeight="312.0" prefWidth="449.0">
+                    </Label>
+                    <TextArea fx:id="word_explainAd" editable="false" layoutX="33.0" layoutY="136.0" prefHeight="312.0" prefWidth="449.0">
                         <font>
-                           <Font name="SansSerif Regular" size="14.0" />
+                            <Font name="SansSerif Regular" size="14.0" />
                         </font>
-                     </TextArea>
-                     <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="33.0" layoutY="87.0" onMouseClicked="#Sound" pickOnBounds="true" preserveRatio="true">
+                    </TextArea>
+                    <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="33.0" layoutY="87.0" onMouseClicked="#Sound" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@iconSpeaker.png" />
+                            <Image url="@iconSpeaker.png" />
                         </image>
-                     </ImageView>
-                     <Button layoutX="372.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#AddToCollection" text="Add to collection" />
-                  </children>
-               </Pane>
-               <Pane fx:id="Buttons" layoutY="450.0" prefHeight="102.0" prefWidth="511.0">
-                  <children>
-                     <Button layoutX="322.0" layoutY="33.0" mnemonicParsing="false" onMouseClicked="#DisplayAddWord" text="Add new word" />
-                     <Button fx:id="edit" layoutX="427.0" layoutY="33.0" mnemonicParsing="false" onMouseClicked="#EditWordExplain" text="Edit" />
-                     <Button layoutX="39.0" layoutY="33.0" mnemonicParsing="false" onMouseClicked="#YourWordsColl" text="My collection" />
-                  </children>
-               </Pane>
-               <Pane fx:id="YourWords" prefHeight="450.0" prefWidth="511.0" visible="false">
-                  <children>
-                     <Label layoutX="31.0" layoutY="24.0" text="Your words" textFill="#462c67">
+                    </ImageView>
+                    <Button layoutX="372.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#AddToCollection" text="Add to collection" />
+                </children>
+            </Pane>
+            <Pane layoutX="231.0" layoutY="440.0" prefHeight="102.0" prefWidth="511.0">
+                <children>
+                    <Button layoutX="322.0" layoutY="33.0" mnemonicParsing="false" onMouseClicked="#DisplayAddWord" text="Add new word" />
+                    <Button fx:id="edit" layoutX="427.0" layoutY="33.0" mnemonicParsing="false" onMouseClicked="#EditWordExplain" text="Edit" />
+                    <Button layoutX="39.0" layoutY="33.0" mnemonicParsing="false" onMouseClicked="#YourWordsColl" text="My collection" />
+                </children>
+            </Pane>
+            <Pane fx:id="YourWords" layoutX="231.0" layoutY="14.0" prefHeight="450.0" prefWidth="511.0" visible="false">
+                <children>
+                    <Label layoutX="31.0" layoutY="24.0" text="Your words" textFill="#462c67">
                         <font>
-                           <Font name="Source Sans Pro Bold" size="45.0" />
+                            <Font name="Source Sans Pro Bold" size="45.0" />
                         </font>
-                     </Label>
-                     <ListView fx:id="yourWords" layoutX="34.0" layoutY="114.0" onMouseClicked="#YourWordsSee" prefHeight="336.0" prefWidth="218.0" />
-                     <ImageView fitHeight="336.0" fitWidth="247.0" layoutX="252.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+                    </Label>
+                    <ListView fx:id="yourWords" layoutX="34.0" layoutY="114.0" onMouseClicked="#YourWordsSee" prefHeight="336.0" prefWidth="218.0" />
+                    <ImageView fitHeight="336.0" fitWidth="247.0" layoutX="252.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@bg3.jpg" />
+                            <Image url="@bg3.jpg" />
                         </image>
-                     </ImageView>
-                  </children>
-               </Pane>
-               <Pane fx:id="AddWord" prefHeight="450.0" prefWidth="511.0" visible="false">
-                  <children>
-                     <Label layoutX="55.0" layoutY="25.0" text="Add new word" textFill="#462c67">
+                    </ImageView>
+                </children>
+            </Pane>
+            <Pane fx:id="AddWord" layoutX="230.0" prefHeight="450.0" prefWidth="511.0" visible="false">
+                <children>
+                    <Label layoutX="55.0" layoutY="25.0" text="Add new word" textFill="#462c67">
                         <font>
-                           <Font name="Source Sans Pro Bold" size="45.0" />
+                            <Font name="Source Sans Pro Bold" size="45.0" />
                         </font>
-                     </Label>
-                     <TextField fx:id="WordType" layoutX="75.0" layoutY="97.0" promptText="Type word..." />
-                     <TextField fx:id="ProType" layoutX="75.0" layoutY="146.0" promptText="Pronunciation..." />
-                     <TextArea fx:id="ExplainType" layoutX="75.0" layoutY="197.0" prefHeight="200.0" prefWidth="348.0" promptText="Type explanation here..." wrapText="true" />
-                     <Button layoutX="213.0" layoutY="412.0" mnemonicParsing="false" onMouseClicked="#AddNewWord" text="Save" />
-                     <ImageView fitHeight="102.0" fitWidth="111.0" layoutX="384.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                    </Label>
+                    <TextField fx:id="WordType" layoutX="75.0" layoutY="97.0" promptText="Type word..." />
+                    <TextField fx:id="ProType" layoutX="75.0" layoutY="146.0" promptText="Pronunciation..." />
+                    <TextArea fx:id="ExplainType" layoutX="75.0" layoutY="197.0" prefHeight="200.0" prefWidth="348.0" promptText="Type explanation here..." wrapText="true" />
+                    <Button layoutX="213.0" layoutY="412.0" mnemonicParsing="false" onMouseClicked="#AddNewWord" text="Save" />
+                    <ImageView fitHeight="102.0" fitWidth="111.0" layoutX="384.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@icon.png" />
+                            <Image url="@icon.png" />
                         </image>
-                     </ImageView>
-                  </children>
-               </Pane>
-            </children>
-         </Pane>
+                    </ImageView>
+                </children>
+            </Pane>
         </Pane>
     </children>
 </AnchorPane>
