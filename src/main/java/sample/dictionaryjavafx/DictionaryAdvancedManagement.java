@@ -17,15 +17,30 @@ public class DictionaryAdvancedManagement {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/evdiction", "root", "Mai123456@");
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from av");
+            ResultSet rs = stmt.executeQuery("select * from advance");
             while (rs.next()) {
                 Word w = new Word();
                 w.setWord_target(rs.getString(1));
                 w.setWord_pronun(rs.getString(2));
-                w.setWord_explain(rs.getString(3).substring(1, rs.getString(3).length() - 1));
-                System.out.println(rs.getString(1) + "  " + rs.getString(2)
-                        + "  " + rs.getString(3));
+                w.setWord_explain(rs.getString(3));
                 Dictionary.wordsAdvanced.add(w);
+            }
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void insertDatabaseBasic() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/evdiction", "root", "Mai123456@");
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from basic");
+            while (rs.next()) {
+                Word w = new Word();
+                w.setWord_target(rs.getString(1));
+                w.setWord_explain(rs.getString(2));
+                Dictionary.words.add(w);
             }
             conn.close();
         } catch (Exception e) {

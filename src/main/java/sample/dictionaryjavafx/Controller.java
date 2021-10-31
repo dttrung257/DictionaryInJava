@@ -63,7 +63,7 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        DictionaryManagement.insertFromFile("src\\dictionaries.txt");
+        DictionaryAdvancedManagement.insertDatabaseBasic();
         DictionaryAdvancedManagement.insertDatabase();
         DictionaryAdvancedManagement.loadAccount();
     }
