@@ -182,7 +182,11 @@ public class Controller implements Initializable {
         account = AccountSignup.getText();
         String password = PasswordSignup.getText();
         String passwordRetype = PasswordRetype.getText();
-        if (DictionaryAdvancedManagement.checkAccount(account, "")) {
+        if (account.equals("account")) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Invalid user name.");
+            alert.show();
+        } else if (DictionaryAdvancedManagement.checkAccount(account, "")) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Account name exists.");
             alert.show();
