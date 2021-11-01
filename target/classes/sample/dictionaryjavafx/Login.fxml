@@ -269,15 +269,15 @@
                             <Font name="Zilla Slab Bold" size="30.0" />
                         </font>
                     </Label>
-                    <TextArea layoutX="39.0" layoutY="86.0" prefHeight="145.0" prefWidth="440.0" />
-                    <Button layoutX="409.0" layoutY="251.0" mnemonicParsing="false" text="Translate" />
-                    <Button layoutX="351.0" layoutY="251.0" mnemonicParsing="false" text="Clear" />
+                    <TextArea fx:id="EngText" layoutX="39.0" layoutY="86.0" prefHeight="145.0" prefWidth="440.0" />
+                    <Button fx:id="TranslatePara" layoutX="409.0" layoutY="251.0" onMouseClicked="#TranslatePara" mnemonicParsing="false" text="Translate" />
+                    <Button fx:id="ClearPara" layoutX="351.0" layoutY="251.0" onMouseClicked="#ClearPara" mnemonicParsing="false" text="Clear" />
                     <Label layoutX="39.0" layoutY="276.0" text="Vietnamese" textFill="#462c67">
                         <font>
                             <Font name="Zilla Slab Bold" size="30.0" />
                         </font>
                     </Label>
-                    <TextArea layoutX="39.0" layoutY="328.0" prefHeight="145.0" prefWidth="440.0" />
+                    <TextArea fx:id="ViText" layoutX="39.0" layoutY="328.0" prefHeight="145.0" prefWidth="440.0" />
                 </children>
             </Pane>
             <Pane fx:id="RightPane" layoutX="230.0" prefHeight="551.0" prefWidth="511.0">

@@ -47,6 +47,8 @@ public class Controller implements Initializable {
     @FXML
     private TextArea word_explainAd, ExplainType;
     @FXML
+    private TextArea EngText, ViText;
+    @FXML
     private Label IncorrectAccount;
     @FXML
     private Button edit;
@@ -148,7 +150,9 @@ public class Controller implements Initializable {
     @FXML
     void DisplayExplain(MouseEvent event) {
         String selectedText = listView.getSelectionModel().getSelectedItem();
-        if (selectedText == null) return;
+        if (selectedText == null) {
+            return;
+        }
         ArrayList<String> result = DictionaryAdvancedManagement.AdvancedExplain(selectedText, null);
         word_explainAd.setText(result.get(0));
         Word_pronunciation.setText(result.get(1));
@@ -251,6 +255,19 @@ public class Controller implements Initializable {
     void ParaTranslate(MouseEvent event) {
         ParaTran.setVisible(!ParaTran.isVisible());
         RightPane.setVisible(!RightPane.isVisible());
+        EngText.setWrapText(true);
+        ViText.setWrapText(true);
+    }
+    @FXML
+    void ClearPara(MouseEvent event) {
+        EngText.setText(null);
+        ViText.setText(null);
+    }
+    @FXML
+    void TranslatePara(MouseEvent event) {//throws IOException {
+        String text = EngText.getText();
+        String viText = DictionaryAdvancedManagement.translateAPI(text);
+        ViText.setText(viText);
     }
     @FXML
     void exit() {
