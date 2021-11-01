@@ -12,10 +12,30 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class DictionaryAdvancedManagement {
+    /** get password of SQL from passSQL file. */
+    public static String getPasswordSQL(String path) {
+        String password = "";
+        try {
+            FileInputStream fileInputStream = new FileInputStream(path);
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+            String line = bufferedReader.readLine();
+            if (line != null) {
+                password = line;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return password;
+    }
+
+    /** Get database from SQL server (DictionariesFull.txt) */
     public static void insertDatabase() {
+        String password = getPasswordSQL("src\\accountData\\passSQL.txt");
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/evdiction", "root", "Mai123456@");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/evdiction", "root", password);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select * from advance");
             while (rs.next()) {
@@ -30,10 +50,13 @@ public class DictionaryAdvancedManagement {
             e.printStackTrace();
         }
     }
+
+    /** Get database from SQL server (Dictionaries.txt) */
     public static void insertDatabaseBasic() {
+        String password = getPasswordSQL("src\\accountData\\passSQL.txt");
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/evdiction", "root", "Mai123456@");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/evdiction", "root", password);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select * from basic");
             while (rs.next()) {
@@ -47,12 +70,8 @@ public class DictionaryAdvancedManagement {
             e.printStackTrace();
         }
     }
-    /**
-     * Search exact word.
-     *
-     * @param str english word
-     * @return vietnamese word
-     */
+
+    /** Search word basic. */
     public static String dictionarySearchExplain(String str) {
         for (int i = 0; i < Dictionary.words.size(); i++) {
             if (Dictionary.words.get(i).getWord_target().equals(str)) {
@@ -61,6 +80,8 @@ public class DictionaryAdvancedManagement {
         }
         return "No exact match found for " + str;
     }
+
+    /** get word from dictionariesFull.txt */
     public static void insertAdvancedFile(String path) {
         try {
             FileInputStream fileInputStream = new FileInputStream(path);
@@ -94,6 +115,8 @@ public class DictionaryAdvancedManagement {
             System.out.println(e.getMessage());
         }
     }
+
+    /** get account from account.txt file for check sign in and sign up. */
     public static void loadAccount() {
         try {
             FileInputStream fileInputStream = new FileInputStream("src\\accountData\\account.txt");
@@ -114,16 +137,24 @@ public class DictionaryAdvancedManagement {
             System.out.println(e.getMessage());
         }
     }
+
+    /** Save username and password of new account to account.txt file. */
     public static void writeAccToFile(String account, String password) {
         try {
-            String str = account + " " + password + "\n";
-            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\accountData\\account.txt", true));
-            writer.append(str);
-            writer.close();
+            FileOutputStream fileOutputStream = new FileOutputStream("src\\accountData\\account.txt", true);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
+            BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
+
+            bufferedWriter.write(account + " " + password + "\n");
+            bufferedWriter.close();
+            outputStreamWriter.close();
+            fileOutputStream.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
+
+    /** check account. */
     public static boolean checkAccount(String account, String password) {
         for (int i = 0; i < Dictionary.accounts.size(); i++) {
             if (Dictionary.accounts.get(i).getAccount().equals(account)) {
@@ -139,19 +170,8 @@ public class DictionaryAdvancedManagement {
         }
         return false;
     }
-    public static ArrayList<String> dictionarySearch(String inputWord) {
-        ArrayList<String> result = new ArrayList<>();
-        for (int i = 0; i < Dictionary.words.size(); i++) {
-            String strTarget = Dictionary.words.get(i).getWord_target();
-            if (strTarget.length() >= inputWord.length()) {
-                if (inputWord.equals(strTarget.substring(0, inputWord.length()))) {
-                    String strExplain = Dictionary.words.get(i).getWord_explain();
-                    result.add(strTarget);
-                }
-            }
-        }
-        return result;
-    }
+
+    /** get word for list view in searchbar.*/
     public static ArrayList<String> dictionarySearchAdvanced(String inputWord) {
         ArrayList<String> result = new ArrayList<>();
         for (int i = 0; i < Dictionary.wordsAdvanced.size(); i++) {
@@ -164,14 +184,13 @@ public class DictionaryAdvancedManagement {
         }
         return result;
     }
-    public static ArrayList<String> AdvancedExplain(String str, String edit) {
+
+    /** get pronunciation àn explain of word in advanced dictionary file. */
+    public static ArrayList<String> AdvancedExplain(String str) {
         ArrayList<String> result = new ArrayList<>();
         for (int i = 0; i < Dictionary.wordsAdvanced.size(); i++) {
-            String strTarget = Dictionary.wordsAdvanced.get(i).getWord_target();
-            if (str.equals(strTarget)) {
-                if (edit != null) {
-                    result.add(edit);
-                } else result.add(Dictionary.wordsAdvanced.get(i).getWord_explain());
+            if (Dictionary.wordsAdvanced.get(i).getWord_target().equals(str)) {
+                result.add(Dictionary.wordsAdvanced.get(i).getWord_explain());
                 result.add(Dictionary.wordsAdvanced.get(i).getWord_pronun());
                 return result;
             }
@@ -180,8 +199,26 @@ public class DictionaryAdvancedManagement {
         result.add("Not found");
         return result;
     }
+
+    /** check duplicate word (add to collection). */
+    public static boolean checkDuplicateWord(String account, String word) {
+        ArrayList<String> yourWords = insertAccountFile("src\\accountData\\" + account + ".txt");
+        boolean isExisted = false;
+        for (String str : yourWords) {
+            if (str.equals(word)) {
+                isExisted = true;
+                break;
+            }
+        }
+        return isExisted;
+    }
+
+    /** add word to account file. */
     public static void writeWordToFile(String account, String word, String pronun, String explain) {
         try {
+            FileOutputStream fileOutputStream  = new FileOutputStream("src\\accountData\\" + account + ".txt", true);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
+            BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
             String[] tokens = explain.split("\n");
             String tmp = "";
             for (int i = 0; i < tokens.length; i++) {
@@ -191,13 +228,16 @@ public class DictionaryAdvancedManagement {
             }
             explain = tmp;
             String str = "@" + word + pronun + "\n" + explain;
-            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\accountData\\" + account + ".txt", true));
-            writer.append(str);
-            writer.close();
+            bufferedWriter.write(str);
+            bufferedWriter.close();
+            outputStreamWriter.close();
+            fileOutputStream.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
+
+    /** get word from collection of account. */
     public static ArrayList<String> insertAccountFile(String path) {
         ArrayList<String> result = new ArrayList<>();
         try {
@@ -208,7 +248,7 @@ public class DictionaryAdvancedManagement {
             while (line != null) {
                 if (line.charAt(0) == '@') {
                     boolean check = false;
-                    int temp = 0;
+                    int index = -1;
                     line = line.substring(1, line.length() - 1);
                     Word w = new Word();
                     if (line.contains("/")) {
@@ -233,13 +273,13 @@ public class DictionaryAdvancedManagement {
                         }
                         if (Dictionary.wordsAdvanced.get(i).getWord_target().equals(w.getWord_target())) {
                             check = true;
-                            temp = i;
+                            index = i;
                             break;
                         }
                     }
                     if (check) {
-                        Dictionary.wordsAdvanced.get(temp).setWord_pronun(w.getWord_pronun());
-                        Dictionary.wordsAdvanced.get(temp).setWord_explain(w.getWord_explain());
+                        Dictionary.wordsAdvanced.get(index).setWord_pronun(w.getWord_pronun());
+                        Dictionary.wordsAdvanced.get(index).setWord_explain(w.getWord_explain());
                     } else {
                         Dictionary.wordsAdvanced.add(w);
                     }
@@ -254,7 +294,48 @@ public class DictionaryAdvancedManagement {
         }
         return result;
     }
-    public static void EditExplain(String account, String word, String explain) {
+
+    /** remove word from collection of account. */
+    public static void removeFromAccountFile(String path, String word) {
+        ArrayList<String> yourWords = insertAccountFile(path);
+        int index = -1;
+        for (int i = 0; i < yourWords.size(); i++) {
+            if (yourWords.get(i).equals(word)) {
+                index = i;
+            }
+        }
+        if (index != - 1) {
+            yourWords.remove(index);
+        }
+
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(path);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
+            BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
+
+            for (String w : yourWords) {
+                String str = "";
+                for (int i = 0; i < Dictionary.wordsAdvanced.size(); i++) {
+                    if (Dictionary.wordsAdvanced.get(i).getWord_target().equals(w)) {
+                        Word thisWord = Dictionary.wordsAdvanced.get(i);
+                        str = "@" + w + thisWord.getWord_pronun() + "\n";
+                        str += thisWord.getWord_explain();
+                    }
+                }
+                if (!str.equals("")) {
+                    bufferedWriter.write(str);
+                }
+            }
+            bufferedWriter.close();
+            outputStreamWriter.close();
+            fileOutputStream.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /** change explain of word in collection. */
+    public static void editExplain(String account, String word, String explain) {
         for (int i = 0; i < Dictionary.wordsAdvanced.size(); i++) {
             if(Dictionary.wordsAdvanced.get(i).getWord_target().equals(word)) {
                 Dictionary.wordsAdvanced.get(i).setWord_explain(explain);
@@ -269,14 +350,14 @@ public class DictionaryAdvancedManagement {
 
             for (String w : yourWords) {
                 for (int i = 0; i < Dictionary.wordsAdvanced.size(); i++) {
-                    Word temp = Dictionary.wordsAdvanced.get(i);
-                    if (temp.getWord_target().equals(w) && !w.equals(word)) {
-                        String line = "@" + temp.getWord_target() + temp.getWord_pronun();
-                        line += "\n" + temp.getWord_explain();
+                    Word thisWord = Dictionary.wordsAdvanced.get(i);
+                    if (Dictionary.wordsAdvanced.get(i).getWord_target().equals(w) && !w.equals(word)) {
+                        String line = "@" + w + thisWord.getWord_pronun() + "\n";
+                        line += thisWord.getWord_explain();
                         bufferedWriter.write(line);
-                    } else if (temp.getWord_target().equals(w) && w.equals(word)) {
-                        String line = "@" + word + temp.getWord_pronun();
-                        line += "\n" + explain;
+                    } else if (Dictionary.wordsAdvanced.get(i).getWord_target().equals(w) && w.equals(word)) {
+                        String line = "@" + w + thisWord.getWord_pronun() + "\n";
+                        line += explain;
                         bufferedWriter.write(line);
                     }
                 }
@@ -288,14 +369,18 @@ public class DictionaryAdvancedManagement {
             System.out.println(e.getMessage());
         }
     }
+
+    /** add new word to account file. */
     public static void AddNewWord(String word, String pronun, String explain) {
         Word w = new Word();
         w.setWord_explain(explain);
         w.setWord_target(word);
-        w.setWord_pronun(pronun);
+        w.setWord_pronun("/" + pronun + "/");
         Dictionary.wordsAdvanced.add(w);
     }
-    public static String translateAPI(String text) {//throws IOException {
+
+    /** translate paragraph. */
+    public static String translateAPI(String text) {
         try {
             String urlStr = "https://script.google.com/macros/s/AKfycbySwcqSyUqlrrss0qvl8Mncg4IRCUq2OLl-S_HIlLY8bhq9xhbv/exec" +
                     "?q=" + URLEncoder.encode(text, "UTF-8") + "&target=vi&source=en";
@@ -314,12 +399,13 @@ public class DictionaryAdvancedManagement {
             return null;
         }
     }
+
+    /** get voice of word. */
     public static void speakWord(String word) {
         System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
         VoiceManager freettsVM = VoiceManager.getInstance();
         Voice freettsVoice = freettsVM.getVoice("kevin16");
         freettsVoice.allocate();
         freettsVoice.speak(word);
-        //freettsVoice.deallocate();
     }
 }
