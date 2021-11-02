@@ -351,6 +351,11 @@
                      <Font size="18.0" />
                   </font>
                </Label>
+               <ImageView fitHeight="23.0" fitWidth="19.0" layoutX="51.0" layoutY="194.0" onMouseClicked="#SoundPara" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@speaker2.png" />
+                  </image>
+               </ImageView>
             </children></Pane>
         </Pane>
     </children>

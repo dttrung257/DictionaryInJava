@@ -427,4 +427,13 @@ public class DictionaryAdvancedManagement {
         freettsVoice.allocate();
         freettsVoice.speak(word);
     }
+
+    /** get voice of sentence. */
+    public static void speakPara(String sentence) {
+        System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
+        VoiceManager freettsVM = VoiceManager.getInstance();
+        Voice freettsVoice = freettsVM.getVoice("kevin16");
+        freettsVoice.allocate();
+        freettsVoice.speak(sentence);
+    }
 }

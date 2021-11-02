@@ -387,6 +387,11 @@ public class Controller implements Initializable {
     }
 
     @FXML
+    void SoundPara(MouseEvent event) {
+        DictionaryAdvancedManagement.speakPara(EngText.getText());
+    }
+
+    @FXML
     void paragraphTranslate(MouseEvent event) {
         paraTranslate.setVisible(!paraTranslate.isVisible());
         rightPane.setVisible(!rightPane.isVisible());
