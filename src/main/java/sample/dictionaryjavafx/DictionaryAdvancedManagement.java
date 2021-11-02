@@ -200,6 +200,25 @@ public class DictionaryAdvancedManagement {
         return result;
     }
 
+    /** check duplicate word (add new word). */
+    public static boolean checkDuplicateAddNewWord(String account, String word) {
+        ArrayList<String> yourWords = insertAccountFile("src\\accountData\\" + account + ".txt");
+        boolean isExisted = false;
+        for (String str : yourWords) {
+            if (str.equals(word)) {
+                isExisted = true;
+                break;
+            }
+        }
+        for (Word w : Dictionary.wordsAdvanced) {
+            if (word.equals(w.getWord_target())) {
+                isExisted = true;
+                break;
+            }
+        }
+        return isExisted;
+    }
+
     /** check duplicate word (add to collection). */
     public static boolean checkDuplicateWord(String account, String word) {
         ArrayList<String> yourWords = insertAccountFile("src\\accountData\\" + account + ".txt");

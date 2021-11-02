@@ -329,14 +329,27 @@ public class Controller implements Initializable {
 
     @FXML
     void AddNewWord(MouseEvent event) {
-        DictionaryAdvancedManagement.AddNewWord(WordType.getText(), ProType.getText(), ExplainType.getText());
-        DictionaryAdvancedManagement.writeWordToFile(account, WordType.getText(), "/" + ProType.getText() + "/", ExplainType.getText());
-        yourWords.getItems().add(WordType.getText());
-        WordType.setText("");
-        ProType.setText("");
-        ExplainType.setText("");
-        AddWord.setVisible(false);
-        WordExplain.setVisible(true);
+        String newWord = WordType.getText();
+        String pronunciation = ProType.getText();
+        String explain = ExplainType.getText();
+        if (newWord.equals("") || pronunciation.equals("") || explain.equals("")) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Please don't empty any blank.");
+            alert.show();
+        } else if (DictionaryAdvancedManagement.checkDuplicateAddNewWord(account, newWord)) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("'" + newWord + "' exists");
+            alert.show();
+        } else {
+            DictionaryAdvancedManagement.AddNewWord(newWord, ProType.getText(), ExplainType.getText());
+            DictionaryAdvancedManagement.writeWordToFile(account, newWord, "/" + ProType.getText() + "/", ExplainType.getText());
+            yourWords.getItems().add(WordType.getText());
+            WordType.setText("");
+            ProType.setText("");
+            ExplainType.setText("");
+            AddWord.setVisible(false);
+            WordExplain.setVisible(true);
+        }
     }
 
     @FXML
@@ -352,7 +365,7 @@ public class Controller implements Initializable {
             DictionaryAdvancedManagement.writeWordToFile(account, Word_target.getText(), Word_pronunciation.getText(), word_explainAd.getText());
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("This word is already in collection.");
+            alert.setContentText("This word already existed in collection.");
             alert.show();
         }
     }
