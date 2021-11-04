@@ -288,7 +288,7 @@ public class Controller implements Initializable {
     void LogOut(MouseEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Log out");
-        alert.setHeaderText("Are you want to log out?");
+        alert.setHeaderText("Do you want to log out?");
         if (alert.showAndWait().get() == ButtonType.OK) {
             ReInitialize();
             searchBar.setText("");
@@ -435,7 +435,7 @@ public class Controller implements Initializable {
     void exit(MouseEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Exit");
-        alert.setHeaderText("Are you want to exit?");
+        alert.setHeaderText("Do you want to exit?");
         if (alert.showAndWait().get() == ButtonType.OK) {
             System.exit(0);
         }

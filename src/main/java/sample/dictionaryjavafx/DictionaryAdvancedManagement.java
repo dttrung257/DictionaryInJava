@@ -35,7 +35,8 @@ public class DictionaryAdvancedManagement {
         String password = getPasswordSQL("src\\accountData\\passSQL.txt");
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/evdiction", "root", password);
+            Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/evdiction",
+                                                        "root", password);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select * from advance");
             while (rs.next()) {
@@ -56,7 +57,8 @@ public class DictionaryAdvancedManagement {
         String password = getPasswordSQL("src\\accountData\\passSQL.txt");
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/evdiction", "root", password);
+            Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/evdiction",
+                                                        "root", password);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select * from basic");
             while (rs.next()) {
@@ -119,8 +121,8 @@ public class DictionaryAdvancedManagement {
     /** get account from account.txt file for check sign in and sign up. */
     public static void loadAccount() {
         try {
-            FileInputStream fileInputStream = new FileInputStream("src\\accountData\\account.txt");
-            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            FileInputStream fis = new FileInputStream("src\\accountData\\account.txt");
+            InputStreamReader inputStreamReader = new InputStreamReader(fis);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String line = null;
             while ((line = bufferedReader.readLine()) != null) {
@@ -132,7 +134,7 @@ public class DictionaryAdvancedManagement {
             }
             bufferedReader.close();
             inputStreamReader.close();
-            fileInputStream.close();
+            fis.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -141,14 +143,15 @@ public class DictionaryAdvancedManagement {
     /** Save username and password of new account to account.txt file. */
     public static void writeAccToFile(String account, String password) {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream("src\\accountData\\account.txt", true);
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
+            String path = "src\\accountData\\account.txt";
+            FileOutputStream fos = new FileOutputStream(path, true);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fos);
             BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
 
             bufferedWriter.write(account + " " + password + "\n");
             bufferedWriter.close();
             outputStreamWriter.close();
-            fileOutputStream.close();
+            fos.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -285,12 +288,13 @@ public class DictionaryAdvancedManagement {
                     }
                     w.setWord_explain(tmp);
                     for (int i = 0; i < Dictionary.wordsAdvanced.size(); i++) {
-                        if(Dictionary.wordsAdvanced.get(i).getWord_target().charAt(0) < w.getWord_target().charAt(0)) {
+                        String wordTarget = Dictionary.wordsAdvanced.get(i).getWord_target();
+                        if(wordTarget.charAt(0) < w.getWord_target().charAt(0)) {
                             i++;
-                        } else if (Dictionary.wordsAdvanced.get(i).getWord_target().charAt(0) > w.getWord_target().charAt(0)) {
+                        } else if (wordTarget.charAt(0) > w.getWord_target().charAt(0)) {
                             break;
                         }
-                        if (Dictionary.wordsAdvanced.get(i).getWord_target().equals(w.getWord_target())) {
+                        if (wordTarget.equals(w.getWord_target())) {
                             check = true;
                             index = i;
                             break;
@@ -363,18 +367,21 @@ public class DictionaryAdvancedManagement {
         }
         ArrayList<String> yourWords = insertAccountFile("src\\accountData\\" + account + ".txt");
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream("src\\accountData\\" + account + ".txt");
+            String path = "src\\accountData\\" + account + ".txt";
+            FileOutputStream fileOutputStream = new FileOutputStream(path);
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
             BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
 
             for (String w : yourWords) {
                 for (int i = 0; i < Dictionary.wordsAdvanced.size(); i++) {
                     Word thisWord = Dictionary.wordsAdvanced.get(i);
-                    if (Dictionary.wordsAdvanced.get(i).getWord_target().equals(w) && !w.equals(word)) {
+                    if (Dictionary.wordsAdvanced.get(i).getWord_target().equals(w)
+                            && !w.equals(word)) {
                         String line = "@" + w + thisWord.getWord_pronun() + "\n";
                         line += thisWord.getWord_explain();
                         bufferedWriter.write(line);
-                    } else if (Dictionary.wordsAdvanced.get(i).getWord_target().equals(w) && w.equals(word)) {
+                    } else if (Dictionary.wordsAdvanced.get(i).getWord_target().equals(w)
+                            && w.equals(word)) {
                         String line = "@" + w + thisWord.getWord_pronun() + "\n";
                         line += explain;
                         bufferedWriter.write(line);
@@ -401,8 +408,9 @@ public class DictionaryAdvancedManagement {
     /** translate paragraph. */
     public static String translateAPI(String text) {
         try {
-            String urlStr = "https://script.google.com/macros/s/AKfycbySwcqSyUqlrrss0qvl8Mncg4IRCUq2OLl-S_HIlLY8bhq9xhbv/exec" +
-                    "?q=" + URLEncoder.encode(text, "UTF-8") + "&target=vi&source=en";
+            String urlStr = "https://script.google.com/" +
+                    "macros/s/AKfycbySwcqSyUqlrrss0qvl8Mncg4IRCUq2OLl-S_HIlLY8bhq9xhbv/exec"
+                    + "?q=" + URLEncoder.encode(text, "UTF-8") + "&target=vi&source=en";
             URL url = new URL(urlStr);
             StringBuilder response = new StringBuilder();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -421,7 +429,8 @@ public class DictionaryAdvancedManagement {
 
     /** get voice of word. */
     public static void speakWord(String word) {
-        System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
+        System.setProperty("freetts.voices",
+                            "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
         VoiceManager freettsVM = VoiceManager.getInstance();
         Voice freettsVoice = freettsVM.getVoice("kevin16");
         freettsVoice.allocate();
@@ -430,7 +439,8 @@ public class DictionaryAdvancedManagement {
 
     /** get voice of sentence. */
     public static void speakPara(String sentence) {
-        System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
+        System.setProperty("freetts.voices",
+                            "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
         VoiceManager freettsVM = VoiceManager.getInstance();
         Voice freettsVoice = freettsVM.getVoice("kevin16");
         freettsVoice.allocate();

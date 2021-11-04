@@ -31,10 +31,11 @@ public class DictionaryApplication extends Application {
         });
     }
 
+    /** exit program. */
     public void Exit(Stage stage) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Exit");
-        alert.setHeaderText("Are you want to exit?");
+        alert.setHeaderText("Do you want to exit?");
         if (alert.showAndWait().get() == ButtonType.OK) {
             stage.close();
         }

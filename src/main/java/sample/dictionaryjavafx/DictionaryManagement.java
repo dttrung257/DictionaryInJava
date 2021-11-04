@@ -57,8 +57,8 @@ public class DictionaryManagement {
     /** Write data from dictionary list to file. */
     public static void dictionaryExportToFile(final String path, ArrayList<Word> newWords) {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(path);
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream, "UTF-8");
+            FileOutputStream fos = new FileOutputStream(path);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fos, "UTF-8");
             BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
 
             for (Word w : newWords) {
@@ -68,7 +68,7 @@ public class DictionaryManagement {
             }
             bufferedWriter.close();
             outputStreamWriter.close();
-            fileOutputStream.close();
+            fos.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -96,7 +96,8 @@ public class DictionaryManagement {
             for (int i = 0; i < size - 1; i++) {
                 String wTarget1 = Dictionary.words.get(i).getWord_target();
                 String wTarget2 = Dictionary.words.get(i + 1).getWord_target();
-                if (wordInput.compareTo(wTarget1) > 0 && wordInput.compareTo(wTarget2) < 0) {
+                if (wordInput.compareTo(wTarget1) > 0
+                        && wordInput.compareTo(wTarget2) < 0) {
                     positionInsert = i + 1;
                     break;
                 }
