@@ -2,15 +2,12 @@ package sample.dictionaryjavafx;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 
 import java.io.File;
 import java.io.IOException;
@@ -160,11 +157,13 @@ public class Controller implements Initializable {
         String password = PasswordLogin.getText();
         if (password.length() < 6 || !DictionaryAdvancedManagement.checkAccount(account, password)) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Invalid account or password.");
+            alert.setTitle("Log in");
+            alert.setHeaderText("Invalid account or password.");
             alert.show();
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Login success.");
+            alert.setTitle("Log in");
+            alert.setHeaderText("Login success.");
             alert.show();
             PasswordLogin.setText("");
             login.setVisible(false);
@@ -184,25 +183,30 @@ public class Controller implements Initializable {
         String passwordRetype = PasswordRetype.getText();
         if (account.equals("account")) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Invalid user name.");
+            alert.setTitle("Sign up");
+            alert.setHeaderText("Invalid user name.");
             alert.show();
         } else if (DictionaryAdvancedManagement.checkAccount(account, "")) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Account name exists.");
+            alert.setTitle("Sign up");
+            alert.setHeaderText("Account name exists.");
             alert.show();
         } else if (account.contains(" ") || password.length() < 6 || password.length() > 20) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Invalid account or password\n"
-                                 + "Account : no spaces\n"
-                                 + "Password : 6 - 20 characters");
+            alert.setTitle("Sign up");
+            alert.setHeaderText("Invalid account or password\n");
+            alert.setContentText("Account : no spaces\n"
+                                + "Password : 6 - 20 characters");
             alert.show();
         } else if (!password.equals(passwordRetype)) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Wrong password.");
+            alert.setTitle("Sign up");
+            alert.setHeaderText("Wrong password.");
             alert.show();
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Congratulations, your account has been successfully created.");
+            alert.setTitle("Sign up");
+            alert.setHeaderText("Congratulations, your account has been successfully created.");
             alert.show();
             path = "src\\accountData\\" + account + ".txt";
             File file = new File(path);
@@ -233,7 +237,9 @@ public class Controller implements Initializable {
     @FXML
     void DisplayExplain(MouseEvent event) {
         String selectedText = listView.getSelectionModel().getSelectedItem();
-        if (selectedText == null) return;
+        if (selectedText == null) {
+            return;
+        }
         ArrayList<String> result = DictionaryAdvancedManagement.AdvancedExplain(selectedText);
         word_explainAd.setText(result.get(0));
         Word_pronunciation.setText(result.get(1));
@@ -247,9 +253,10 @@ public class Controller implements Initializable {
     void EditWordExplain(MouseEvent event) {
         if (DictionaryAdvancedManagement.checkDuplicateWord(account, Word_target.getText())) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("You cannot edit word in collection.\n" +
-                    "You can remove '" + Word_target.getText()
-                    + "' from collection and edit this word");
+            alert.setTitle("Edit explain");
+            alert.setHeaderText("You cannot edit word in collection.");
+            alert.setContentText("You can remove '" + Word_target.getText()
+                                + "' from collection and edit this word");
             alert.show();
         } else {
             word_explainAd.setEditable(!word_explainAd.isEditable());
@@ -257,7 +264,9 @@ public class Controller implements Initializable {
                 edit.setText("Save");
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setContentText("This word has been edited, you can add it to collection to save.");
+                alert.setTitle("Edit explain");
+                alert.setHeaderText("This word has been edited");
+                alert.setContentText("you can add it to collection to save.");
                 alert.show();
                 String explain = word_explainAd.getText();
                 String[] tokens = explain.split("\n");
@@ -277,15 +286,20 @@ public class Controller implements Initializable {
 
     @FXML
     void LogOut(MouseEvent event) {
-        ReInitialize();
-        searchBar.setText("");
-        word_explainAd.setText("");
-        Word_target.setText("");
-        Word_pronunciation.setText("");
-        login.setVisible(true);
-        SearchAcc.setVisible(false);
-        LoginPane.setVisible(true);
-        SignUpPane.setVisible(false);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Log out");
+        alert.setHeaderText("Are you want to log out?");
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            ReInitialize();
+            searchBar.setText("");
+            word_explainAd.setText("");
+            Word_target.setText("");
+            Word_pronunciation.setText("");
+            login.setVisible(true);
+            SearchAcc.setVisible(false);
+            LoginPane.setVisible(true);
+            SignUpPane.setVisible(false);
+        }
     }
 
     @FXML
@@ -334,13 +348,19 @@ public class Controller implements Initializable {
         String explain = ExplainType.getText();
         if (newWord.equals("") || pronunciation.equals("") || explain.equals("")) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Please don't empty any blank.");
+            alert.setTitle("Add new word");
+            alert.setHeaderText("Please don't empty any blank.");
             alert.show();
         } else if (DictionaryAdvancedManagement.checkDuplicateAddNewWord(account, newWord)) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("'" + newWord + "' exists");
+            alert.setTitle("Add new word");
+            alert.setHeaderText("'" + newWord + "' exists");
             alert.show();
         } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Add new word");
+            alert.setHeaderText("'" + newWord + "' is added.");
+            alert.show();
             DictionaryAdvancedManagement.AddNewWord(newWord, ProType.getText(), ExplainType.getText());
             DictionaryAdvancedManagement.writeWordToFile(account, newWord, "/" + ProType.getText() + "/", ExplainType.getText());
             yourWords.getItems().add(WordType.getText());
@@ -359,13 +379,15 @@ public class Controller implements Initializable {
         }
         if (!DictionaryAdvancedManagement.checkDuplicateWord(account, Word_target.getText())) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("This word has been added to collection.");
+            alert.setTitle("Add to collection");
+            alert.setHeaderText("This word has been added to collection.");
             alert.show();
             yourWords.getItems().add(Word_target.getText());
             DictionaryAdvancedManagement.writeWordToFile(account, Word_target.getText(), Word_pronunciation.getText(), word_explainAd.getText());
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("This word already existed in collection.");
+            alert.setTitle("Add to collection");
+            alert.setHeaderText("This word already existed in collection.");
             alert.show();
         }
     }
@@ -410,7 +432,12 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void exit() {
-        System.exit(0);
+    void exit(MouseEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Exit");
+        alert.setHeaderText("Are you want to exit?");
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            System.exit(0);
+        }
     }
 }

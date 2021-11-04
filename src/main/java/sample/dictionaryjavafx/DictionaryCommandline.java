@@ -60,7 +60,7 @@ public class DictionaryCommandline {
     /** Main. */
     public static void main(String[] args) {
         Dictionary dictionary = new Dictionary();
-        DictionaryAdvancedManagement.insertAdvancedFile("src\\dictionariesFull.txt");
+        /*DictionaryAdvancedManagement.insertAdvancedFile("src\\dictionariesFull.txt");
         System.out.printf("%-10s%-22s%-22s%s\n", "No", "English", "Pronunciation", "Vietnamese");
         System.out.println("--------------------------------------------------------------------");
         for (int i = 0; i < Dictionary.wordsAdvanced.size(); i++) {
@@ -68,15 +68,8 @@ public class DictionaryCommandline {
             String wordExplain = Dictionary.wordsAdvanced.get(i).getWord_explain();
             String wordPronun = Dictionary.wordsAdvanced.get(i).getWord_pronun();
             System.out.printf("%-10s%-22s%-22s%s\n", i + 1, wordTarget, wordPronun, wordExplain);
-        }
-        //DictionaryManagement.insertFromFile("src\\dictionaries.txt");
-        //System.out.println(DictionaryManagement.dictionarySearchExplain("aback"));
-        //dictionaryBasic();
-        //dictionaryAdvanced();
-        /*ArrayList<String> list = dictionarySearch("ab");
-        for (int  i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
         }*/
+        dictionaryAdvanced();
     }
 }
 
